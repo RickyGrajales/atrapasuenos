@@ -2,23 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EvidenciaIcbf extends Model
+class DerechoVulnerado extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'nombre',
+        'tipo_derecho',
         'descripcion',
-        'archivo',
-        'fecha_subida',
+        'nna_id'
     ];
 
     public function nna()
     {
         return $this->belongsTo(Nna::class);
     }
-
 }

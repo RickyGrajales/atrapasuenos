@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_documento');
+            $table->string('tipo'); // ejemplo: informe, acta, soporte
+            $table->string('archivo'); // ruta del archivo
+            $table->date('fecha_subida');
             $table->timestamps();
+
+            $table->foreignId('familia_id')->constrained('familias')->onDelete('cascade');
+
         });
     }
 

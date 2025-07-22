@@ -13,6 +13,22 @@ return new class extends Migration
     {
         Schema::create('valoracion_psicosocials', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_nna');
+            $table->date('fecha_valoracion');
+
+            // ✅ profesional_id bien definido
+            $table->foreignId('profesional_id')
+                  ->nullable()
+                  ->constrained('talento_humanos')
+                  ->onDelete('set null');
+
+            // ✅ nna_id bien definido
+            $table->foreignId('nna_id')
+                  ->constrained('nnas')
+                  ->onDelete('cascade');
+
+            $table->text('observaciones')->nullable();
+            $table->text('recomendaciones')->nullable();
             $table->timestamps();
         });
     }

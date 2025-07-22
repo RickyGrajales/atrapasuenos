@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('indicadors', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_indicador');
+            $table->string('tipo'); // ejemplo: cualitativo, cuantitativo
+            $table->text('descripcion');
+            $table->string('unidad_medida');
             $table->timestamps();
+
+            $table->foreignId('institucion_id')->constrained('institucion_aliadas')->onDelete('cascade');
+
         });
     }
 

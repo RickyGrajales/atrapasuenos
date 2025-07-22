@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('participacion_encuentros', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_participante');
+            $table->string('rol'); // Ejemplo: cuidador, docente, funcionario ICBF
+            $table->string('institucion')->nullable();
+            
             $table->timestamps();
+
+            $table->foreignId('encuentro_id')->constrained('encuentros')->onDelete('cascade');
+
         });
     }
 

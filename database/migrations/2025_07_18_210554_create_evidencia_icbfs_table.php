@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('evidencia_icbfs', function (Blueprint $table) {
             $table->id();
+            $table->string('descripcion');
+            $table->string('archivo'); // ruta del archivo
+            $table->date('fecha');
             $table->timestamps();
+
+            $table->foreignId('responsabilidad_id')->constrained('responsabilidad_icbfs')->onDelete('cascade');
+
         });
     }
 
