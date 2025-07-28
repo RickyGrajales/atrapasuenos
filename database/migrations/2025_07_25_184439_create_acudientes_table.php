@@ -6,27 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('nnas', function (Blueprint $table) {
+       Schema::create('acudientes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('nna_id'); // relación con tabla nnas
             $table->string('nombres');
             $table->string('apellidos');
-            $table->date('fecha_nacimiento');
             $table->string('documento_identidad')->unique();
-            $table->enum('genero', ['masculino', 'femenino', 'otro']);
-            $table->string('grupo_etnico')->nullable(); // lo puedes dejar si lo usarás después
-            $table->string('discapacidad')->nullable();
-            $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
             $table->string('correo')->nullable();
-            $table->text('observaciones')->nullable();
-            $table->timestamps();
-        });
+            $table->string('parentesco');
+            $table->timestamps();   
+
+    $table->foreign('nna_id')->references('id')->on('nnas')->onDelete('cascade');
+});
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('nnas');
+        Schema::dropIfExists('acudientes');
     }
 };

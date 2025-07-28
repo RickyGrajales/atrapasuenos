@@ -17,9 +17,16 @@ use App\Http\Controllers\SeguimientoPsicosocialController;
 use App\Http\Controllers\HistoriaClinicaController;
 use App\Http\Controllers\DerechoVulneradoController;
 use App\Http\Controllers\MedidaProteccionController;
+use App\Http\Controllers\AcudienteController;
 
+Route::get('/nna', [NnaController::class, 'index'])->name('nna.index');
 Route::get('/nna/create',[NnaController::class, 'create'])->name('nna.create');
 Route::post('/nna', [NnaController::class, 'store'])->name('nna.store');
+Route::get('/nna/{id}/edit', [NnaController::class, 'edit'])->name('nna.edit');
+Route::put('/nna/{id}', [NnaController::class, 'update'])->name('nna.update');
+Route::delete('/nna/{id}', [NnaController::class, 'destroy'])->name('nna.destroy');
+
+
 
 Route::resource('familia', FamiliaController::class);
 Route::resource('talento-humano', TalentoHumanoController::class);
@@ -36,5 +43,5 @@ Route::resource('seguimiento-psicosocial', SeguimientoPsicosocialController::cla
 Route::resource('historia-clinica', HistoriaClinicaController::class);
 Route::resource('derecho-vulnerado', DerechoVulneradoController::class);
 Route::resource('medida-proteccion', MedidaProteccionController::class);
-
+Route::resource('acudientes', AcudienteController::class);
 

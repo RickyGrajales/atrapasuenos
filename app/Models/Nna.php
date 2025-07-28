@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nna extends Model
 {
-    protected $table = 'nna';
+    protected $table = 'nnas';
 
     protected $fillable = [
         'nombres',
@@ -14,9 +14,12 @@ class Nna extends Model
         'fecha_nacimiento',
         'documento_identidad',
         'genero',
+        'grupo_etnico',
+        'discapacidad',
         'direccion',
         'telefono',
         'correo',
+        'observaciones'
     ];
 
     // Relación con Familia
@@ -61,5 +64,10 @@ class Nna extends Model
         return $this->hasMany(MedidaProteccion::class, 'nna_id');
     }
 
+    //Relacion con Acudiente
+    public function acudiente()
+{
+    return $this->belongsTo(Acudiente::class);
+}
     
 }

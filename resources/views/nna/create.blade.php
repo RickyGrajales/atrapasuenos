@@ -1,74 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Registrar NNA</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Registrar NNA</h2>
 
     @if(session('success'))
-        <div style="color: green;">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <form action="{{ route('nna.store') }}" method="POST">
         @csrf
 
-        <div>
-            <label for="nombres">Nombres:</label>
-            <input type="text" name="nombres" required>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="nombres" class="form-label">Nombres:</label>
+                <input type="text" name="nombres" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="apellidos" class="form-label">Apellidos:</label>
+                <input type="text" name="apellidos" class="form-control" required>
+            </div>
         </div>
 
-        <div>
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" name="apellidos" required>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                <input type="date" name="fecha_nacimiento" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="documento_identidad" class="form-label">Documento de identidad:</label>
+                <input type="text" name="documento_identidad" class="form-control" required>
+            </div>
         </div>
 
-        <div>
-            <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-            <input type="date" name="fecha_nacimiento" required>
-        </div>
-
-        <div>
-            <label for="documento_identidad">Documento de identidad:</label>
-            <input type="text" name="documento_identidad" required>
-        </div>
-
-        <div>
-            <label for="genero">Género:</label>
-            <select name="genero" required>
+        <div class="mb-3">
+            <label for="genero" class="form-label">Género:</label>
+            <select name="genero" class="form-select" required>
                 <option value="">Seleccione</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-                <option value="Otro">Otro</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
             </select>
         </div>
 
-        <div>
-            <label for="direccion">Dirección:</label>
-            <input type="text" name="direccion">
+        <div class="mb-3">
+            <label for="grupo_etnico" class="form-label">Grupo étnico:</label>
+            <select name="grupo_etnico" class="form-select">
+                <option value="">Seleccione</option>
+                <option value="Indígena">Indígena</option>
+                <option value="Afrodescendiente">Afrodescendiente</option>
+                <option value="Palenquero">Palenquero</option>
+                <option value="Raizal">Raizal</option>
+                <option value="Rom (Gitano)">Rom (Gitano)</option>
+                <option value="Ninguno">Ninguno</option>
+            </select>
         </div>
 
-        <div>
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono">
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección:</label>
+            <input type="text" name="direccion" class="form-control">
         </div>
 
-        <div>
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" name="correo">
+        <div class="row mb-3">
+            <div class="col">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" name="telefono" class="form-control">
+            </div>
+            <div class="col">
+                <label for="correo" class="form-label">Correo electrónico:</label>
+                <input type="email" name="correo" class="form-control">
+            </div>
         </div>
 
-        <div>
-            <label for="discapacidad">Discapacidad (sí/no o tipo):</label>
-            <input type="text" name="discapacidad">
+        <div class="mb-3">
+            <label for="discapacidad" class="form-label">Discapacidad (sí/no o tipo):</label>
+            <input type="text" name="discapacidad" class="form-control">
         </div>
 
-        <div>
-            <label for="observaciones">Observaciones:</label>
-            <textarea name="observaciones" rows="3"></textarea>
+        <div class="mb-3">
+            <label for="observaciones" class="form-label">Observaciones:</label>
+            <textarea name="observaciones" rows="3" class="form-control"></textarea>
         </div>
 
-        <div>
-            <button type="submit">Registrar</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </div>
 @endsection
