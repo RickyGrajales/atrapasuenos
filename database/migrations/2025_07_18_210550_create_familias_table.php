@@ -1,21 +1,18 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
+return new class extends Migration {
+    public function up(): void {
         Schema::create('familias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nna_id'); // FK hacia NNA
-            $table->string('nombre_acudiente');
-            $table->string('parentesco');
+            $table->unsignedBigInteger('nna_id'); // FK a nnas
+            $table->string('nombre_madre')->nullable();
+            $table->string('nombre_padre')->nullable();
+            $table->string('otros_miembros')->nullable();
             $table->string('telefono')->nullable();
             $table->string('direccion')->nullable();
             $table->text('observaciones')->nullable();
@@ -25,11 +22,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('familias');
     }
 };

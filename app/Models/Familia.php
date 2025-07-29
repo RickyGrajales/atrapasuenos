@@ -10,10 +10,12 @@ class Familia extends Model
 
     protected $fillable = [
         'nna_id',
-        'nombre_acudiente',
-        'parentesco',
-        'telefono_acudiente',
-        'direccion_acudiente',
+        'nombre_madre',
+        'nombre_padre',
+        'otros_miembros',
+        'telefono',
+        'direccion',
+        'observaciones',
     ];
 
     public function nna()

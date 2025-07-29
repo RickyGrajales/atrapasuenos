@@ -34,10 +34,11 @@ Route::post('/acudiente', [AcudienteController::class, 'store'])->name('acudient
 Route::get('/acudiente/{id}/edit', [AcudienteController::class, 'edit'])->name('acudiente.edit');
 Route::put('/acudiente/{id}', [AcudienteController::class, 'update'])->name('acudiente.update');
 
-
-
-
+//Rutas Familia
 Route::resource('familia', FamiliaController::class);
+
+
+
 Route::resource('talento-humano', TalentoHumanoController::class);
 Route::resource('instituciones', InstitucionAliadaController::class);
 Route::resource('encuentros', EncuentroController::class);

@@ -3,55 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Models\Familia;
+use App\Models\Nna;
 use Illuminate\Http\Request;
 
 class FamiliaController extends Controller
 {
     public function index()
     {
-        return response()->json(Familia::with('nna')->get());
+        $familias = Familia::with('nna')->get();
+        return view('familia.index', compact('familias'));
+    }
+
+    public function create()
+    {
+        $nnaList = Nna::all();
+        return view('familia.create', compact('nnaList'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nna_id' => 'required|exists:nna,id',
-            'nombre_padre' => 'required|string|max:100',
-            'nombre_madre' => 'required|string|max:100',
-            'telefono_contacto' => 'required|string|max:20',
-            'direccion' => 'required|string|max:255',
+        $request->validate([
+            'nna_id' => 'required|exists:nnas,id',
+            'nombre_madre' => 'nullable|string|max:255',
+            'nombre_padre' => 'nullable|string|max:255',
+            'otros_miembros' => 'nullable|string|max:255',
+            'telefono' => 'nullable|string|max:20',
+            'direccion' => 'nullable|string|max:255',
+            'observaciones' => 'nullable|string',
         ]);
 
-        $familia = Familia::create($validated);
-        return response()->json($familia, 201);
+        Familia::create($request->all());
+        return redirect()->route('familia.index')->with('success', 'Familia registrada correctamente.');
     }
 
-    public function show($id)
+    public function edit(Familia $familia)
     {
-        $familia = Familia::with('nna')->findOrFail($id);
-        return response()->json($familia);
+        $nnaList = Nna::all();
+        return view('familia.edit', compact('familia', 'nnaList'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Familia $familia)
     {
-        $familia = Familia::findOrFail($id);
-
-        $validated = $request->validate([
-            'nna_id' => 'sometimes|required|exists:nna,id',
-            'nombre_padre' => 'sometimes|required|string|max:100',
-            'nombre_madre' => 'sometimes|required|string|max:100',
-            'telefono_contacto' => 'sometimes|required|string|max:20',
-            'direccion' => 'sometimes|required|string|max:255',
+        $request->validate([
+            'nna_id' => 'required|exists:nnas,id',
         ]);
 
-        $familia->update($validated);
-        return response()->json($familia);
+        $familia->update($request->all());
+        return redirect()->route('familia.index')->with('success', 'Familia actualizada.');
     }
 
     public function destroy($id)
     {
         $familia = Familia::findOrFail($id);
         $familia->delete();
-        return response()->json(['message' => 'Familia eliminada']);
+        return redirect()->route('familia.index')->with('success', 'Familia eliminada.');
     }
 }
