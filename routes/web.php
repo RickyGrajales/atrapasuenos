@@ -19,26 +19,46 @@ use App\Http\Controllers\DerechoVulneradoController;
 use App\Http\Controllers\MedidaProteccionController;
 use App\Http\Controllers\AcudienteController;
 
-//rutas nna
+/*
+|--------------------------------------------------------------------------
+| RUTAS NNA
+|--------------------------------------------------------------------------
+*/
 Route::get('/nna', [NnaController::class, 'index'])->name('nna.index');
-Route::get('/nna/create',[NnaController::class, 'create'])->name('nna.create');
+Route::get('/nna/create', [NnaController::class, 'create'])->name('nna.create');
 Route::post('/nna', [NnaController::class, 'store'])->name('nna.store');
 Route::get('/nna/{id}/edit', [NnaController::class, 'edit'])->name('nna.edit');
 Route::put('/nna/{id}', [NnaController::class, 'update'])->name('nna.update');
 Route::delete('/nna/{id}', [NnaController::class, 'destroy'])->name('nna.destroy');
 
-//rutas de acudientes
+/*
+|--------------------------------------------------------------------------
+| RUTAS ACUDIENTES
+|--------------------------------------------------------------------------
+*/
 Route::resource('acudiente', AcudienteController::class);
 Route::get('/acudiente/create', [AcudienteController::class, 'create'])->name('acudiente.create');
 Route::post('/acudiente', [AcudienteController::class, 'store'])->name('acudiente.store');
 Route::get('/acudiente/{id}/edit', [AcudienteController::class, 'edit'])->name('acudiente.edit');
 Route::put('/acudiente/{id}', [AcudienteController::class, 'update'])->name('acudiente.update');
 
-//Rutas Familia
-Route::resource('familia', FamiliaController::class);
+/*
+|--------------------------------------------------------------------------
+| RUTAS FAMILIA (Corregido)
+|--------------------------------------------------------------------------
+*/
+
+//Route::resource('familia', FamiliaController::class);
+// Asegúrate de que tu controlador FamiliaController use el parámetro $familia, no $familium
+Route::resource('familia', FamiliaController::class)->parameters(['familia' => 'familia']); // 👈 obligamos a que el parámetro sea 'familia'
 
 
 
+/*
+|--------------------------------------------------------------------------
+| RUTAS ADICIONALES
+|--------------------------------------------------------------------------
+*/
 Route::resource('talento-humano', TalentoHumanoController::class);
 Route::resource('instituciones', InstitucionAliadaController::class);
 Route::resource('encuentros', EncuentroController::class);
@@ -53,5 +73,6 @@ Route::resource('seguimiento-psicosocial', SeguimientoPsicosocialController::cla
 Route::resource('historia-clinica', HistoriaClinicaController::class);
 Route::resource('derecho-vulnerado', DerechoVulneradoController::class);
 Route::resource('medida-proteccion', MedidaProteccionController::class);
-Route::resource('acudientes', AcudienteController::class);
 
+// Elimina duplicado:
+/*Route::resource('acudientes', AcudienteController::class); // <-- ya está arriba como 'acudiente'*/

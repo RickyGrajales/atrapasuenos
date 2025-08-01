@@ -10,8 +10,8 @@ class FamiliaController extends Controller
 {
     public function index()
     {
-        $familias = Familia::with('nna')->get();
-        return view('familia.index', compact('familias'));
+        $familia = Familia::with('nna')->get();
+        return view('familia.index', compact('familia'));
     }
 
     public function create()
@@ -36,9 +36,10 @@ class FamiliaController extends Controller
         return redirect()->route('familia.index')->with('success', 'Familia registrada correctamente.');
     }
 
-    public function edit(Familia $familia)
+    public function edit($id)
     {
-        $nnaList = Nna::all();
+        $familia = Familia::findOrFail($id);
+        $nnaList = Nna::all(); // si es necesario para el select
         return view('familia.edit', compact('familia', 'nnaList'));
     }
 

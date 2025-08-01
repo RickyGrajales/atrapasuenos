@@ -9,6 +9,7 @@ class Nna extends Model
     protected $table = 'nnas';
 
     protected $fillable = [
+        'acudiente_id', // <- esto es importante
         'nombres',
         'apellidos',
         'fecha_nacimiento',

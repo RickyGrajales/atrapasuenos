@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('familias', function (Blueprint $table) {
+        Schema::create('familia', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nna_id'); // FK a nnas
             $table->string('nombre_madre')->nullable();
@@ -23,6 +23,6 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        Schema::dropIfExists('familias');
+        Schema::dropIfExists('familia');
     }
 };

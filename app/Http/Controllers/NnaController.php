@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nna;
+use App\Models\Acudiente;
 use Illuminate\Http\Request;
 
 class NnaController extends Controller
@@ -16,6 +17,7 @@ class NnaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'acudiente_id' => 'nullable|exists:acudientes,id',
             'nombres' => 'required|string|max:100',
             'apellidos' => 'required|string|max:100',
             'fecha_nacimiento' => 'required|date',
@@ -44,6 +46,7 @@ class NnaController extends Controller
         $nna = Nna::findOrFail($id);
 
         $validated = $request->validate([
+            'acudiente_id' => 'nullable|exists:acudientes,id',
             'nombres' => 'sometimes|required|string|max:100',
             'apellidos' => 'sometimes|required|string|max:100',
             'fecha_nacimiento' => 'sometimes|required|date',
@@ -70,13 +73,16 @@ class NnaController extends Controller
 
     public function create()
     {
-        return view('nna.create');
+        $acudientes = Acudiente::all();
+        return view('nna.create', compact('acudientes'));
     }
 
     public function edit($id)
 {
     $nna = Nna::findOrFail($id);
-    return view('nna.edit', compact('nna'));
+    $acudientes = Acudiente::all();
+    return view('nna.edit', compact('nna', 'acudientes'));
 }
+
 
 }

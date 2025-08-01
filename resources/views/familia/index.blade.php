@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($familias as $familia)
+                @foreach ($familia as $familia)
                     <tr>
                         <td>{{ $familia->nna->nombres }} {{ $familia->nna->apellidos }}</td>
                         <td>{{ $familia->nombre_madre }}</td>

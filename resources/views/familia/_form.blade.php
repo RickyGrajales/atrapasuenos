@@ -1,6 +1,6 @@
-<form action="{{ $route }}" method="POST">
+<form action="{{ isset($familia) ? route('familia.update', $familia->id) : route('familia.store') }}" method="POST">
     @csrf
-    @if ($method === 'PUT')
+    @if(isset($familia))
         @method('PUT')
     @endif
 
@@ -9,8 +9,7 @@
         <select name="nna_id" class="form-control" required>
             <option value="">Seleccione</option>
             @foreach ($nnaList as $nna)
-                <option value="{{ $nna->id }}"
-                    {{ isset($familia) && $familia->nna_id == $nna->id ? 'selected' : '' }}>
+                <option value="{{ $nna->id }}" {{ isset($familia) && $familia->nna_id == $nna->id ? 'selected' : '' }}>
                     {{ $nna->nombres }} {{ $nna->apellidos }}
                 </option>
             @endforeach
