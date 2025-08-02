@@ -10,8 +10,8 @@ class FamiliaController extends Controller
 {
     public function index()
     {
-        $familia = Familia::with('nna')->get();
-        return view('familia.index', compact('familia'));
+        $familias = Familia::with('nna')->get();
+        return view('familia.index', compact('familias'));
     }
 
     public function create()
