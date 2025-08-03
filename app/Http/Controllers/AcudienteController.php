@@ -12,8 +12,8 @@ class AcudienteController extends Controller
 
     public function index()
     {
-        $acudiente = \App\Models\Acudiente::with('nna')->get();
-        return view('acudiente.index', compact('acudiente'));
+        $acudientes = \App\Models\Acudiente::with('nna')->get();
+        return view('acudiente.index', compact('acudientes'));
     }
 
     // Mostrar formulario para editar un acudiente

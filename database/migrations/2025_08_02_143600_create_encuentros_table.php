@@ -13,17 +13,13 @@ return new class extends Migration
     {
         Schema::create('encuentros', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('tipo'); // ejemplo: sensibilización, capacitación
-            $table->string('lugar');
-            $table->text('descripcion');
-            $table->unsignedBigInteger('institucion_id')->nullable(); 
+            $table->foreignId('nna_id')->constrained()->onDelete('cascade');
+            $table->date('fecha_encuentro');
+            $table->string('tema_tratado');
+            $table->string('responsable');
+            $table->text('observaciones')->nullable();
             $table->timestamps();
-                    
-            // 2. Luego se define la clave foránea
-    $table->foreign('institucion_id')->references('id')->on('institucion_aliadas')->onDelete('set null');
-       
-});
+        });
     }
 
     /**
