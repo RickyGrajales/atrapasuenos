@@ -14,18 +14,21 @@ class Acudiente extends Model
 
     // Atributos que se pueden asignar en masa
     protected $fillable = [
+        'nna_id',
         'nombres',
         'apellidos',
         'documento_identidad',
         'telefono',
         'correo',
         'direccion',
+        'parentesco'
         // Agrega más si tienes más columnas
     ];
 
     // Relación: un acudiente tiene muchos NNA
-    public function nnas()
+
+    public function nna()
     {
-        return $this->hasMany(Nna::class);
+        return $this->belongsTo(Nna::class);
     }
 }
